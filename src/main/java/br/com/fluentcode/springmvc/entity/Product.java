@@ -1,14 +1,26 @@
-package br.com.fluentcode.springmvc.dto;
+package br.com.fluentcode.springmvc.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
+	
+	@Id
+	@GeneratedValue
+	private Integer id;
 	
 	private String name;
 	
 	private Double price;
 
-	public Product(String name, double price) {
-		this.name = name;
-		this.price = price;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -26,5 +38,5 @@ public class Product {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	
 }
