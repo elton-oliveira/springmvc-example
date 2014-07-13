@@ -7,48 +7,60 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fluentcode.springmvc.entity.Product;
 
 /**
  * 
- * As anotações do Spring @Controller, @Component e @Repository tem o mesmo mesmo
- * objetivo, indicar ao Spring que os beans anotados devem ser gerenciados. A
- * diferença entre as mesmas é apenas semântica.
+ * As anotações do Spring @Controller, @Component e @Repository tem o mesmo
+ * mesmo objetivo, indicar ao Spring que os beans anotados devem ser
+ * gerenciados. A diferença entre as mesmas é apenas semântica.
  * 
  */
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
-	private Session session;
+	private SessionFactory factory;
 
-	// FIXME Deve injetar direto a session
+	// FIXME Deve injetar direto a session???
 	@Autowired
 	public ProductDAOImpl(SessionFactory factory) {
-		this.session = factory.openSession();
+		this.factory = factory;
 	}
 
 	@Override
 	public Product findById(Integer id) {
+		Session session = factory.openSession();
 		return (Product) session.get(Product.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
+		Session session = factory.openSession();
 		Criteria criteria = session.createCriteria(Product.class);
 		return criteria.list();
 	}
 
+	/**
+	 * @Transactional Declara o método como transacional, delega a resposabilidade para Spring
+	 * de abrir uma Session e gerenciar a transação.
+	 */
+	@Transactional
 	@Override
 	public void insert(Product product) {
-		session.beginTransaction();// FIXME Retirar isso daqui
+		/*
+		 * Obtém a mesma Session que o Spring abre, para que o mesmo possa fazer
+		 * o controle da transação
+		 */
+		Session session = factory.getCurrentSession();
 		session.persist(product);
-		session.getTransaction().commit();// FIXME Retirar isso daqui
 	}
 
 	@Override
 	public void delete(Product product) {
+		Session session = factory.openSession();
 		session.delete(product);
 	}
 }
