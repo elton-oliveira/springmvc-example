@@ -24,4 +24,19 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- Integração do spring com o hibernate, com isso a SessionFactory, agora 
+		controlada pelo Spring, pode ser injeta em todos os componentes do Spring. 
+		Além disso, ao delegar o controle da SessionFactory para o Spring, ele consegue 
+		abrir e fechar transações de maneira automática, de maneira muito parecida 
+		com o JTA. -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="annotatedClasses">
+			<list>
+				<value>br.com.fluentcode.springmvc.entity.Product</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>

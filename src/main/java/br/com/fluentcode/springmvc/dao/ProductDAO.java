@@ -12,7 +12,7 @@ public interface ProductDAO {
 
 	void insert(Product product);
 	
-	void remove(Product product);
+	void delete(Product product);
 
 
 }

@@ -2,58 +2,53 @@ package br.com.fluentcode.springmvc.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
-import org.springframework.stereotype.Component;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.fluentcode.springmvc.entity.Product;
 
-@Component
+/**
+ * 
+ * As anotações do Spring @Controller, @Component e @Repository tem o mesmo mesmo
+ * objetivo, indicar ao Spring que os beans anotados devem ser gerenciados. A
+ * diferença entre as mesmas é apenas semântica.
+ * 
+ */
+@Repository
 public class ProductDAOImpl implements ProductDAO {
 
-	private EntityManager em;
-	
-	//FIXME Remover
-	private EntityManagerFactory fa = Persistence.createEntityManagerFactory("pu_mvc");
+	private Session session;
 
-	//FIXME Injetar o EntityManager aqui no construtor
-	public ProductDAOImpl() {
-		
+	// FIXME Deve injetar direto a session
+	@Autowired
+	public ProductDAOImpl(SessionFactory factory) {
+		this.session = factory.openSession();
 	}
-	
+
 	@Override
 	public Product findById(Integer id) {
-		em = fa.createEntityManager();//FIXME Remover a criação do EntityManager daqui
-		return em.find(Product.class, id);
+		return (Product) session.get(Product.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
-		em = fa.createEntityManager();//FIXME Remover a criação do EntityManager daqui
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Product> cq = cb.createQuery(Product.class);
-		CriteriaQuery<Product> select = cq.select(cq.from(Product.class));
-		TypedQuery<Product> query = em.createQuery(select);
-		return query.getResultList();
+		Criteria criteria = session.createCriteria(Product.class);
+		return criteria.list();
 	}
 
 	@Override
 	public void insert(Product product) {
-		em = fa.createEntityManager();//FIXME Remover a criação do EntityManager daqui
-		EntityTransaction tx = em.getTransaction();//FIXME O spring deve gerenciar isso
-		tx.begin();//FIXME O spring deve gerenciar isso
-		em.persist(product);
-		tx.commit();//FIXME O spring deve gerenciar isso
+		session.beginTransaction();// FIXME Retirar isso daqui
+		session.persist(product);
+		session.getTransaction().commit();// FIXME Retirar isso daqui
 	}
 
 	@Override
-	public void remove(Product product) {
-		em.remove(product);
+	public void delete(Product product) {
+		session.delete(product);
 	}
 }
