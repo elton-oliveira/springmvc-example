@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,6 +29,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public Product findById(Integer id) {
+		em = fa.createEntityManager();//FIXME Remover a criação do EntityManager daqui
 		return em.find(Product.class, id);
 	}
 
@@ -43,7 +45,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void insert(Product product) {
+		em = fa.createEntityManager();//FIXME Remover a criação do EntityManager daqui
+		EntityTransaction tx = em.getTransaction();//FIXME O spring deve gerenciar isso
+		tx.begin();//FIXME O spring deve gerenciar isso
 		em.persist(product);
+		tx.commit();//FIXME O spring deve gerenciar isso
 	}
 
 	@Override

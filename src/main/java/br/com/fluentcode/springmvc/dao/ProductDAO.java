@@ -10,9 +10,9 @@ public interface ProductDAO {
 
 	List<Product> findAll();
 
-	void insert(Product t);
+	void insert(Product product);
 	
-	void remove(Product t);
+	void remove(Product product);
 
 
 }

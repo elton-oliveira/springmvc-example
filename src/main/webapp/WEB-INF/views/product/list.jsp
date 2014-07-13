@@ -5,7 +5,9 @@
 <body>
 	<h2>Product List</h2>
 	<c:forEach items="${products}" var="product">
-		${product.name} - ${product.price} <br>
+		${product.name} - 
+		<!-- FIXME Remover o contexto da url -->
+		<a href="/springmvc-example/products/detail/${product.id}.html">Detail</a><br/>
 	</c:forEach>
 </body>
 </html>
