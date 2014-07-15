@@ -1,5 +1,6 @@
 package br.com.fluentcode.springmvc.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -55,6 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
 		 * o controle da transação
 		 */
 		Session session = factory.getCurrentSession();
+		product.setLastModified(new Date());//FIXME Tirar isso daqui
 		session.saveOrUpdate(product);
 	}
 

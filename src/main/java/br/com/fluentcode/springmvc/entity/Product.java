@@ -1,5 +1,7 @@
 package br.com.fluentcode.springmvc.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ public class Product {
 	private String name;
 	
 	private Double price;
+	
+	private Date lastModified;
 
 	public Integer getId() {
 		return id;
@@ -37,6 +41,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public Date getLastModified() {
+		return lastModified;
+	}
+	
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
 	}
 	
 }
