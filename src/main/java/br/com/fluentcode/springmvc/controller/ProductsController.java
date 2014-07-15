@@ -28,7 +28,7 @@ public class ProductsController {
 
 	// url: /products/detail/1.html
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-	public ModelAndView findById(@PathVariable("id") Integer id) {
+	public ModelAndView detail(@PathVariable("id") Integer id) {
 		// view
 		ModelAndView modelAndView = new ModelAndView("product/detail");
 		modelAndView.addObject("product", productDAO.findById(id));
@@ -41,13 +41,31 @@ public class ProductsController {
 		// view
 		return "product/create";
 	}
-
+	
 	// url: /products/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Product product) {
-		productDAO.insert(product);
+	public String saveOrUpdate(Product product) {
+		productDAO.save(product);
 		// invokes the list method
 		return "redirect:/products/list.html";
 	}
+	
+	// url: /products/edit/1.html
+	@RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
+	public ModelAndView edit(@PathVariable("id") Integer id) {
+		// view
+		ModelAndView modelAndView = new ModelAndView("product/edit");
+		modelAndView.addObject("product", productDAO.findById(id));
+		return modelAndView;
+	}
+	
+	// url: /products/delete/1.html
+	@RequestMapping(value = "/delete/{id}", method=RequestMethod.GET)
+	public String delete(@PathVariable("id") Integer id) {
+		productDAO.delete(id);
+		// invokes the list method
+		return "redirect:/products/list.html";
+	}
+
 
 }

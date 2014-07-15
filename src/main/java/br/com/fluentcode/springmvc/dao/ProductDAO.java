@@ -10,9 +10,7 @@ public interface ProductDAO {
 
 	List<Product> findAll();
 
-	void insert(Product product);
+	void save(Product product);
 	
-	void delete(Product product);
-
-
+	void delete(Integer id);
 }

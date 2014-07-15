@@ -44,23 +44,33 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	/**
-	 * @Transactional Declara o método como transacional, delega a resposabilidade para Spring
+	 * @Transactional declara o método como transacional, delega a responsabilidade para Spring
 	 * de abrir uma Session e gerenciar a transação.
 	 */
 	@Transactional
 	@Override
-	public void insert(Product product) {
+	public void save(Product product) {
 		/*
 		 * Obtém a mesma Session que o Spring abre, para que o mesmo possa fazer
 		 * o controle da transação
 		 */
 		Session session = factory.getCurrentSession();
-		session.persist(product);
+		session.saveOrUpdate(product);
 	}
 
+	/**
+	 * @Transactional declara o método como transacional, delega a responsabilidade para Spring
+	 * de abrir uma Session e gerenciar a transação.
+	 */
+	@Transactional
 	@Override
-	public void delete(Product product) {
-		Session session = factory.openSession();
+	public void delete(Integer id) {
+		/*
+		 * Obtém a mesma Session que o Spring abre, para que o mesmo possa fazer
+		 * o controle da transação
+		 */
+		Session session = factory.getCurrentSession();
+		Object product = session.load(Product.class, id);
 		session.delete(product);
 	}
 }
