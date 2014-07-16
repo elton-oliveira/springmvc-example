@@ -1,7 +1,10 @@
 package br.com.fluentcode.springmvc.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +47,10 @@ public class ProductsController {
 	
 	// url: /products/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveOrUpdate(Product product) {
+	public String save(@Valid Product product, BindingResult result) {
+		if(result.hasErrors()){
+			return "/product/create";//TODO Ver como direcionar para a página anterior
+		}
 		productDAO.save(product);
 		// invokes the list method
 		return "redirect:/products/list.html";
@@ -57,6 +63,17 @@ public class ProductsController {
 		ModelAndView modelAndView = new ModelAndView("product/edit");
 		modelAndView.addObject("product", productDAO.findById(id));
 		return modelAndView;
+	}
+	
+	// url: /products/update.html
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@Valid Product product, BindingResult result) {
+		if(result.hasErrors()){
+			return "/product/edit";//TODO Ver como direcionar para a página anterior
+		}
+		productDAO.save(product);
+		// invokes the list method
+		return "redirect:/products/list.html";
 	}
 	
 	// url: /products/delete/1.html

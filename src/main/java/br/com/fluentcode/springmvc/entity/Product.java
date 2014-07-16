@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Product {
@@ -13,8 +16,10 @@ public class Product {
 	@GeneratedValue
 	private Integer id;
 	
+	@NotEmpty
 	private String name;
 	
+	@NotNull
 	private Double price;
 	
 	private Date lastModified;

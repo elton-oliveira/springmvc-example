@@ -6,7 +6,7 @@
 <body>
 	<h2>Editing Product</h2>
 	<!-- FIXME Remover o contexto da url -->
-	<form action="/springmvc-example/products/save.html" method="POST">
+	<form action="/springmvc-example/products/update.html" method="POST">
 	    <input type="hidden" name="id" value="${product.id}">
 		<input type="text" name="name" value="${product.name}"/> 
 		<input type="text" name="price" value="${product.price}" /> 
