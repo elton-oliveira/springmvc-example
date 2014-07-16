@@ -7,8 +7,9 @@
 	<h2>New Product</h2>
 	<!-- FIXME Remover o contexto da url -->
 	<form action="/springmvc-example/products/save.html" method="POST">
-		<input type="text" name="name" /> 
-		<input type="text" name="price" /> 
+	   <!-- Seta o value para manter o estado em caso de dados inválidos. -->
+		<input type="text" name="name" value="${product.name}"/> 
+		<input type="text" name="price" value="${product.price}" />
 		<input type="submit" value="Save" />
 	</form>
 </body>

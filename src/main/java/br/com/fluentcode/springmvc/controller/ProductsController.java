@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,8 +48,10 @@ public class ProductsController {
 	
 	// url: /products/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(@Valid Product product, BindingResult result) {
+	public String save(@Valid Product product, BindingResult result, Model model) {
 		if(result.hasErrors()){
+			// Seta o atributo para manter o estado em caso de dados inválidos
+			model.addAttribute("product", product);
 			return "/product/create";//TODO Ver como direcionar para a página anterior
 		}
 		productDAO.save(product);
