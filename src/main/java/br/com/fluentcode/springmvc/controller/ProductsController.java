@@ -41,16 +41,17 @@ public class ProductsController {
 	
 	// url: /products/create.html
 	@RequestMapping(value = "/create", method=RequestMethod.GET)
-	public String create() {
+	public ModelAndView create() {
 		// view
-		return "product/create";
+		ModelAndView modelAndView = new ModelAndView("product/create");
+		modelAndView.addObject("product", new Product());
+		return modelAndView;
 	}
 	
 	// url: /products/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@Valid Product product, BindingResult result, Model model) {
 		if(result.hasErrors()){
-			// Seta o atributo para manter o estado em caso de dados inválidos
 			model.addAttribute("product", product);
 			return "/product/create";//TODO Ver como direcionar para a página anterior
 		}
@@ -70,8 +71,9 @@ public class ProductsController {
 	
 	// url: /products/update.html
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(@Valid Product product, BindingResult result) {
+	public String update(@Valid Product product, BindingResult result, Model model) {
 		if(result.hasErrors()){
+			model.addAttribute("product", product);
 			return "/product/edit";//TODO Ver como direcionar para a página anterior
 		}
 		productDAO.save(product);
