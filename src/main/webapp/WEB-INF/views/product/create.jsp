@@ -8,8 +8,8 @@
 	<!-- FIXME Remover o contexto da url -->
 	<!-- O Elemento form do spring é utilizado para poder exibir as mensagens do bean validator em tela -->
 	<form:form action="/springmvc-example/products/save.html" method="POST" commandName="product">
-		<form:input path="name"/><form:errors path="name" /><br />
-		<form:input path="price" /><form:errors path="price" /><br />
+		Name: <form:input path="name"/><form:errors path="name" /><br />
+		Price: <form:input path="price" /><form:errors path="price" /><br />
 		<input type="submit" value="Save" />
 	</form:form>
 </body>

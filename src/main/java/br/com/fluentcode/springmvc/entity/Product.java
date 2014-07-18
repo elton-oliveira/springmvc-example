@@ -1,5 +1,6 @@
 package br.com.fluentcode.springmvc.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Product {
 	private String name;
 	
 	@NotNull
-	private Double price;
+	private BigDecimal price;
 	
 	private Date lastModified;
 
@@ -40,11 +41,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	

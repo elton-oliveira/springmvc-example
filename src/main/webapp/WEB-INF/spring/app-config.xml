@@ -71,4 +71,11 @@
 		Spring MVC. -->
 	<tx:annotation-driven />
 
+	<!-- Customização das mensagens de validação. Configura o Spring para ler 
+		um arquivo de menssagens onde as chaves dos erros estão com os valores redefinidos. -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/i18n/messages" />
+	</bean>
+
 </beans>
