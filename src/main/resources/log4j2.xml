@@ -7,13 +7,17 @@
 		</Console>
 	</Appenders>
 	<Loggers>
-		<!-- Sets the log of the entire project -->
+		<!-- Root element sets the log of the entire project -->
 		<Root level="ERROR">
 			<AppenderRef ref="stdout" />
 		</Root>
-		<!-- Sets the log of a package or a class -->
-		<Logger name="br.com.fluentcode.springmvc.controller"
-			level="TRACE" additivity="false">
+		<!-- Logger element sets the log of a package or a class -->
+		<Logger name="br.com.fluentcode.springmvc.controller" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<Logger name="org.springframework" level="DEBUG"
+			additivity="false">
 			<AppenderRef ref="stdout" />
 		</Logger>
 	</Loggers>
