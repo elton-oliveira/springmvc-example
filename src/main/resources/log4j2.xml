@@ -7,14 +7,14 @@
 		</Console>
 	</Appenders>
 	<Loggers>
-		<!-- Sets the log of a specific class -->
-		<Logger name="br.com.fluentcode.springmvc.controller.ProductsController"
-			level="TRACE" additivity="false">
-			<AppenderRef ref="stdout" />
-		</Logger>
 		<!-- Sets the log of the entire project -->
 		<Root level="ERROR">
 			<AppenderRef ref="stdout" />
 		</Root>
+		<!-- Sets the log of a package or a class -->
+		<Logger name="br.com.fluentcode.springmvc.controller"
+			level="TRACE" additivity="false">
+			<AppenderRef ref="stdout" />
+		</Logger>
 	</Loggers>
 </Configuration>
