@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+	<!-- Appenders are responsible for writing the messages somewhere -->
+	<Appenders>
+		<Console name="stdout" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss} [%p] - %c [%M]: %m%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<!-- Sets the log of a specific class -->
+		<Logger name="br.com.fluentcode.springmvc.controller.ProductsController"
+			level="TRACE" additivity="false">
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<!-- Sets the log of the entire project -->
+		<Root level="ERROR">
+			<AppenderRef ref="stdout" />
+		</Root>
+	</Loggers>
+</Configuration>
