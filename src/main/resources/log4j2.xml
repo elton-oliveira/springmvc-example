@@ -16,8 +16,10 @@
 			additivity="false">
 			<AppenderRef ref="stdout" />
 		</Logger>
-		<Logger name="org.springframework" level="DEBUG"
-			additivity="false">
+		<Logger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<Logger name="org.hibernate" level="DEBUG" additivity="false">
 			<AppenderRef ref="stdout" />
 		</Logger>
 	</Loggers>
