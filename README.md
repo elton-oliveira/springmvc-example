@@ -1,0 +1,1 @@
+Set -Dorg.jboss.logging.provider="slf4j" to hibernate uses slf4j
