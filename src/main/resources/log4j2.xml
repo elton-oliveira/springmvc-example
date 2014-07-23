@@ -3,7 +3,7 @@
 	<!-- Appenders are responsible for writing the messages somewhere -->
 	<Appenders>
 		<Console name="stdout" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss} [%p] - %c [%M]: %m%n" />
+			<PatternLayout pattern="%date{HH:mm:ss} [%-5level] %class.%method:%line|%msg%n" />
 		</Console>
 	</Appenders>
 	<Loggers>
