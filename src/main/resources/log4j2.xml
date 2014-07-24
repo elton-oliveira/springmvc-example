@@ -7,7 +7,7 @@
 		</Console>
 	</Appenders>
 	<Loggers>
-		<!-- Root element sets the log of the entire project -->
+		<!-- Root element sets the default logger for the project -->
 		<Root level="ERROR">
 			<AppenderRef ref="stdout" />
 		</Root>
