@@ -11,6 +11,7 @@
 	<properties>
 		<springframework-version>4.0.6.RELEASE</springframework-version>
 		<log4j-version>2.0</log4j-version>
+		<aspectj-version>1.8.1</aspectj-version>
 	</properties>
 
 	<dependencies>
@@ -95,12 +96,24 @@
 			<version>${log4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- This bridge routes apache commons logging (used by spring) to log4j-->
+		<!-- This bridge routes apache commons logging (used by spring) to log4j -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>${log4j-version}</version>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- AspectJ runtime and weaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj-version}</version>
 		</dependency>
 	</dependencies>
 	<build>

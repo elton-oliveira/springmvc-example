@@ -5,6 +5,9 @@
 		<Console name="stdout" target="SYSTEM_OUT">
 			<PatternLayout pattern="%date{HH:mm:ss} [%-5level] %class.%method:%line|%msg%n" />
 		</Console>
+		<Console name="stdout.aj" target="SYSTEM_OUT">
+			<PatternLayout pattern="%date{HH:mm:ss} [%-5level] %msg%n" />
+		</Console>
 	</Appenders>
 	<Loggers>
 		<!-- Root element sets the default logger for the project -->
@@ -15,6 +18,10 @@
 		<Logger name="br.com.fluentcode.springmvc.controller" level="TRACE"
 			additivity="false">
 			<AppenderRef ref="stdout" />
+		</Logger>
+		<Logger name="aspect.br.com.fluentcode" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="stdout.aj" />
 		</Logger>
 		<Logger name="org.springframework" level="INFO" additivity="false">
 			<AppenderRef ref="stdout" />
