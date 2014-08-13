@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggerAspect {
 
-	@Pointcut("execution(*  br.com.fluentcode..*.*(..))")
+	@Pointcut("execution(* br.com.fluentcode..*.*(..))")
 	public void allMethods() {
 	}
 	
