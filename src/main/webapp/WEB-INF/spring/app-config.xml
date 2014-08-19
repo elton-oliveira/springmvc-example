@@ -16,11 +16,10 @@
 
 	<context:component-scan base-package="br.com.fluentcode.springmvc" />
 
-	<!-- ViewResolver tem como objetivo integrar o Controller e o View, deixando-os 
-		desacoplados. Quando um Controller é executado, ele devolve o nome da View 
-		que deve ser renderizada para à DispatchServlet. Ela por sua vez passa o 
-		nome para o ViewResolver que descobre a view concatenando o nome retornado 
-		ao prefix e suffix configurados. -->
+	<!-- ViewResolver maps view names to actual views. So when a view name is 
+		returned by a Controller, the ViewResolver will resolve the view according 
+		to the view name. ViewResolver discovers the view concatenating the view 
+		name to the prefix and suffix configured. -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
