@@ -30,7 +30,7 @@ public class ProductsController {
 	// url: /products/list.html
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
-		logger.info("Listando os produtos");
+		logger.info("Listing products");
 		// view
 		ModelAndView modelAndView = new ModelAndView("product/list");
 		modelAndView.addObject("products", productDAO.findAll());
@@ -40,7 +40,7 @@ public class ProductsController {
 	// url: /products/detail/1.html
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public ModelAndView detail(@PathVariable("id") Integer id) {
-		logger.info("Redirecionando para a tela de detalhes do produto");
+		logger.info("Redirecting to product details");
 		// view
 		ModelAndView modelAndView = new ModelAndView("product/detail");
 		modelAndView.addObject("product", productDAO.findById(id));
@@ -50,7 +50,7 @@ public class ProductsController {
 	// url: /products/create.html
 	@RequestMapping(value = "/create", method=RequestMethod.GET)
 	public ModelAndView create() {
-		logger.info("Redirecionando para a tela de criação do produto");
+		logger.info("Redirecting to product creation");
 		// view
 		ModelAndView modelAndView = new ModelAndView("product/create");
 		modelAndView.addObject("product", new Product());
@@ -60,11 +60,11 @@ public class ProductsController {
 	// url: /products/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@Valid Product product, BindingResult result, Model model) {
-		logger.info("Salvando o produto: {}", product.getName());
+		logger.info("Inserting the product: {}", product.getName());
 		if(result.hasErrors()){
 			logger.warn("The Product contains invalid data");
 			model.addAttribute("product", product);
-			return "/product/create";//TODO Ver como direcionar para a página anterior
+			return "/product/create";
 		}
 		product.setLastModified(new Date());
 		productDAO.save(product);
@@ -75,7 +75,7 @@ public class ProductsController {
 	// url: /products/edit/1.html
 	@RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable("id") Integer id) {
-		logger.info("Redirecionando para a tela de edição do produto: {}", id);
+		logger.info("Redirecting to the product edition: {}", id);
 		// view
 		ModelAndView modelAndView = new ModelAndView("product/edit");
 		modelAndView.addObject("product", productDAO.findById(id));
@@ -85,11 +85,11 @@ public class ProductsController {
 	// url: /products/update.html
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@Valid Product product, BindingResult result, Model model) {
-		logger.info("Atualizando o produto: id {}, name {}", product.getId(), product.getName());
+		logger.info("Updating the product: id {}, name {}", product.getId(), product.getName());
 		if(result.hasErrors()){
 			logger.warn("The Product contains invalid data");
 			model.addAttribute("product", product);
-			return "/product/edit";//TODO Ver como direcionar para a página anterior
+			return "/product/edit";
 		}
 		product.setLastModified(new Date());
 		productDAO.save(product);
@@ -100,11 +100,10 @@ public class ProductsController {
 	// url: /products/delete/1.html
 	@RequestMapping(value = "/delete/{id}", method=RequestMethod.GET)
 	public String delete(@PathVariable("id") Integer id) {
-		logger.info("Deletando o produto: {}", id);
+		logger.info("Deleting the product: {}", id);
 		productDAO.delete(id);
 		// invokes the list method
 		return "redirect:/products/list.html";
 	}
-
 
 }
