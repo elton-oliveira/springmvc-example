@@ -1,5 +1,7 @@
 package br.com.fluentcode.springmvc.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -64,6 +66,7 @@ public class ProductsController {
 			model.addAttribute("product", product);
 			return "/product/create";//TODO Ver como direcionar para a página anterior
 		}
+		product.setLastModified(new Date());
 		productDAO.save(product);
 		// invokes the list method
 		return "redirect:/products/list.html";
@@ -88,6 +91,7 @@ public class ProductsController {
 			model.addAttribute("product", product);
 			return "/product/edit";//TODO Ver como direcionar para a página anterior
 		}
+		product.setLastModified(new Date());
 		productDAO.save(product);
 		// invokes the list method
 		return "redirect:/products/list.html";

@@ -1,6 +1,5 @@
 package br.com.fluentcode.springmvc.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -16,9 +15,9 @@ import br.com.fluentcode.springmvc.entity.Product;
 
 /**
  * 
- * As anotações do Spring @Controller, @Component e @Repository tem o mesmo
- * mesmo objetivo, indicar ao Spring que os beans anotados devem ser
- * gerenciados. A diferença entre as mesmas é apenas semântica.
+ * The spring annotations @Controller, @Component and @Repository has the same goal,
+ * indicate to the Spring that the beans must be managed. The difference between
+ * them is just semantics.
  * 
  */
 @Repository
@@ -28,7 +27,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	private SessionFactory factory;
 
-	// FIXME Deve injetar direto a session???
+	// Inject the session factory
 	@Autowired
 	public ProductDAOImpl(SessionFactory factory) {
 		this.factory = factory;
@@ -36,7 +35,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public Product findById(Integer id) {
-		logger.info("Consultando o produto: {}", id);
+		logger.info("Querying the product: {}", id);
 		Session session = factory.openSession();
 		return (Product) session.get(Product.class, id);
 	}
@@ -44,41 +43,34 @@ public class ProductDAOImpl implements ProductDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
-		logger.info("Consultando todos os produtos");
+		logger.info("Querying all products");
 		Session session = factory.openSession();
 		Criteria criteria = session.createCriteria(Product.class);
 		return criteria.list();
 	}
 
 	/**
-	 * @Transactional declara o método como transacional, delega a responsabilidade para Spring
-	 * de abrir uma Session e gerenciar a transação.
+	 * @Transactional declares the method as transactional. Delegates
+	 * responsibility for Spring to open session and manage the transaction.
 	 */
 	@Transactional
 	@Override
 	public void save(Product product) {
-		logger.info("Salvando o produto");
-		/*
-		 * Obtém a mesma Session que o Spring abre, para que o mesmo possa fazer
-		 * o controle da transação
-		 */
+		logger.info("Saving the product");
+		//Get the same Session that the Spring opens, so that it can make the transaction control.
 		Session session = factory.getCurrentSession();
-		product.setLastModified(new Date());//FIXME Tirar isso daqui
 		session.saveOrUpdate(product);
 	}
 
 	/**
-	 * @Transactional declara o método como transacional, delega a responsabilidade para Spring
-	 * de abrir uma Session e gerenciar a transação.
+	 * @Transactional declares the method as transactional. Delegates
+	 * responsibility for Spring to open session and manage the transaction.
 	 */
 	@Transactional
 	@Override
 	public void delete(Integer id) {
-		logger.info("Deletando o produto: {}", id);
-		/*
-		 * Obtém a mesma Session que o Spring abre, para que o mesmo possa fazer
-		 * o controle da transação
-		 */
+		logger.info("Deleting the product: {}", id);
+		//Get the same Session that the Spring opens, so that it can make the transaction control.
 		Session session = factory.getCurrentSession();
 		Object product = session.load(Product.class, id);
 		session.delete(product);
