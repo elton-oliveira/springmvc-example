@@ -9,9 +9,9 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-	<!-- Anotações como @Controller, por exemplo, não são lidas por default. 
-		O Spring sempre usa o XML como padrão. Para usarmos classes anotadas, temos 
-		que configurar o XML do Spring com as tags mvc:annotation-driven e context:component-scan. -->
+	<!-- Annotations such as @Controller, for example, are not read by default. 
+		The Spring always uses XML as default. To use annotated classes, we have 
+		to configure the Spring XML tags mvc:annotation-driven and context:component-scan. -->
 	<mvc:annotation-driven />
 
 	<context:component-scan base-package="br.com.fluentcode.springmvc" />
@@ -59,27 +59,25 @@
 		</property>
 	</bean>
 
-	<!-- Configuração do Transaction Manager. Habilita o Spring para que ele 
-		posso abrir e fechar transações do hibernate. O métodos que o spring deve 
-		gerenciar as transações devem ser configurados com @Transaction -->
+	<!-- Transaction Manager configuration. Enables the Spring to open and close 
+		hibernate transactions. The methods that the spring should manage transactions 
+		must be configured with @Transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<!-- Informa ao Spring que o controle de transações será feito via anotação 
-		@Transaction, parecido com a forma de habilitar o uso de anotações para o 
-		Spring MVC. -->
+	<!-- Enables @Transaction annotation. -->
 	<tx:annotation-driven />
 
-	<!-- Customização das mensagens de validação. Configura o Spring para ler 
-		um arquivo de menssagens onde as chaves dos erros estão com os valores redefinidos. -->
+	<!-- Validation messages customization . Configure Spring to read a validation 
+		messages file where the values ​​of the message keys are customized. -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/i18n/messages" />
 	</bean>
 	
-	<!-- habilita o suporte ao aspecto (AOP) -->
+	<!-- Enables the aspect (AOP) -->
 	<aop:aspectj-autoproxy />
 
 </beans>
