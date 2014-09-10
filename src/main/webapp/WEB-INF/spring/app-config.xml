@@ -68,7 +68,7 @@
 	</bean>
 
 	<!-- Enables @Transaction annotation. -->
-	<tx:annotation-driven />
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<!-- Validation messages customization . Configure Spring to read a validation 
 		messages file where the values ​​of the message keys are customized. -->

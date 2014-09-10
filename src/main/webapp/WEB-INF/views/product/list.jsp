@@ -6,10 +6,9 @@
 	<h2>Product List</h2>
 	<c:forEach items="${products}" var="product">
 		${product.name} - 
-		<!-- FIXME Remover o contexto da url -->
-		<a href="/springmvc-example/products/detail/${product.id}.html">Detail</a> - 
-		<a href="/springmvc-example/products/edit/${product.id}.html">Edit</a> -
-		<a href="/springmvc-example/products/delete/${product.id}.html">Delete</a> <br />
+		<a href="${pageContext.request.contextPath}/products/detail/${product.id}.html">Detail</a> - 
+		<a href="${pageContext.request.contextPath}/products/edit/${product.id}.html">Edit</a> -
+		<a href="${pageContext.request.contextPath}/products/delete/${product.id}.html">Delete</a> <br />
 	</c:forEach>
 </body>
 </html>
