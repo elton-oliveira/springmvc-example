@@ -26,30 +26,21 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:jboss/datasources/MysqlDS" />
+	</bean> 
+
 	<!-- Integração do spring com o hibernate, com isso a SessionFactory, agora 
 		controlada pelo Spring, pode ser injeta em todos os componentes do Spring. 
 		Agora também podemos configurar um Transaction Manager para que o Spring 
 		consiga abrir e fechar transações de maneira automática. -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/db_mvc</prop>
-				<prop key="hibernate.connection.username">root</prop>
-				<prop key="hibernate.connection.password"></prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-
-				<!-- TODO para conseguir habilitar a tx do spring. Ver tambem o pom.xml -->
-				<prop key="hibernate.c3p0.min_size">5</prop>
-				<prop key="hibernate.c3p0.max_size">20</prop>
-				<prop key="hibernate.c3p0.timeout">300</prop>
-				<prop key="hibernate.c3p0.max_statements">50</prop>
-				<prop key="hibernate.c3p0.idle_test_period">3000</prop>
-				<!-- fim TODO -->
 			</props>
 		</property>
 		<property name="annotatedClasses">
