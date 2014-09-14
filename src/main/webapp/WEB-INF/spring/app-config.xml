@@ -26,14 +26,15 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- Looks up a datasource. Exposes the dasource found in JNDI for bean references. -->
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:jboss/datasources/MysqlDS" />
-	</bean> 
+	</bean>
 
-	<!-- Integração do spring com o hibernate, com isso a SessionFactory, agora 
-		controlada pelo Spring, pode ser injeta em todos os componentes do Spring. 
-		Agora também podemos configurar um Transaction Manager para que o Spring 
-		consiga abrir e fechar transações de maneira automática. -->
+	<!-- Integration of spring with hibernate. The SessionFactory, now controlled 
+		by Spring, can be injected into all components of Spring. Now we can also 
+		configure a Transaction Manager for the Spring can open and close transactions 
+		automatically. -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
