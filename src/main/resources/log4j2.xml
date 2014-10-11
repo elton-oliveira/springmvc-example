@@ -14,20 +14,5 @@
 		<Root level="ERROR">
 			<AppenderRef ref="stdout" />
 		</Root>
-		<!-- Logger element sets the log of a package or a class -->
-		<Logger name="br.com.fluentcode.springmvc.controller" level="TRACE"
-			additivity="false">
-			<AppenderRef ref="stdout" />
-		</Logger>
-		<Logger name="aspect.br.com.fluentcode" level="TRACE"
-			additivity="false">
-			<AppenderRef ref="stdout.aj" />
-		</Logger>
-		<Logger name="org.springframework" level="INFO" additivity="false">
-			<AppenderRef ref="stdout" />
-		</Logger>
-		<Logger name="org.hibernate" level="DEBUG" additivity="false">
-			<AppenderRef ref="stdout" />
-		</Logger>
 	</Loggers>
 </Configuration>

@@ -19,15 +19,15 @@ import br.com.fluentcode.springmvc.dao.ProductDAO;
 import br.com.fluentcode.springmvc.entity.Product;
 
 @Controller
-@RequestMapping(value = "/products")
-public class ProductsController {
+@RequestMapping(value = "/product")
+public class ProductController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ProductDAO productDAO;
 
-	// url: /products/list.html
+	// url: /product/list.html
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		logger.info("Listing products");
@@ -37,7 +37,7 @@ public class ProductsController {
 		return modelAndView;
 	}
 
-	// url: /products/detail/1.html
+	// url: /product/detail/1.html
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public ModelAndView detail(@PathVariable("id") Integer id) {
 		logger.info("Redirecting to product details");
@@ -47,7 +47,7 @@ public class ProductsController {
 		return modelAndView;
 	}
 	
-	// url: /products/create.html
+	// url: /product/create.html
 	@RequestMapping(value = "/create", method=RequestMethod.GET)
 	public ModelAndView create() {
 		logger.info("Redirecting to product creation");
@@ -57,7 +57,7 @@ public class ProductsController {
 		return modelAndView;
 	}
 	
-	// url: /products/save.html
+	// url: /product/save.html
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@Valid Product product, BindingResult result, Model model) {
 		logger.info("Inserting the product: {}", product.getName());
@@ -69,10 +69,10 @@ public class ProductsController {
 		product.setLastModified(new Date());
 		productDAO.save(product);
 		// invokes the list method
-		return "redirect:/products/list.html";
+		return "redirect:/product/list.html";
 	}
 	
-	// url: /products/edit/1.html
+	// url: /product/edit/1.html
 	@RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable("id") Integer id) {
 		logger.info("Redirecting to the product edition: {}", id);
@@ -82,7 +82,7 @@ public class ProductsController {
 		return modelAndView;
 	}
 	
-	// url: /products/update.html
+	// url: /product/update.html
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@Valid Product product, BindingResult result, Model model) {
 		logger.info("Updating the product: id {}, name {}", product.getId(), product.getName());
@@ -94,16 +94,16 @@ public class ProductsController {
 		product.setLastModified(new Date());
 		productDAO.save(product);
 		// invokes the list method
-		return "redirect:/products/list.html";
+		return "redirect:/product/list.html";
 	}
 	
-	// url: /products/delete/1.html
+	// url: /product/delete/1.html
 	@RequestMapping(value = "/delete/{id}", method=RequestMethod.GET)
 	public String delete(@PathVariable("id") Integer id) {
 		logger.info("Deleting the product: {}", id);
 		productDAO.delete(id);
 		// invokes the list method
-		return "redirect:/products/list.html";
+		return "redirect:/product/list.html";
 	}
 
 }

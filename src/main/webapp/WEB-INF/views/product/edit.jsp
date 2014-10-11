@@ -6,7 +6,7 @@
 <body>
 	<h2>Editing Product</h2>
 	<!-- The spring form is used to display messages validator bean -->
-	<form:form action="${pageContext.request.contextPath}/products/update.html" method="POST" commandName="product">
+	<form:form action="${pageContext.request.contextPath}/product/update.html" method="POST" commandName="product">
 	    <form:hidden path="id"/>
 		Name: <form:input path="name"/><form:errors path="name" /><br />
 		Price: <form:input path="price" /><form:errors path="price" /><br />

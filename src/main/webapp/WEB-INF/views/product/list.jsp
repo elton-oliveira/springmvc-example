@@ -6,9 +6,9 @@
 	<h2>Product List</h2>
 	<c:forEach items="${products}" var="product">
 		${product.name} - 
-		<a href="${pageContext.request.contextPath}/products/detail/${product.id}.html">Detail</a> - 
-		<a href="${pageContext.request.contextPath}/products/edit/${product.id}.html">Edit</a> -
-		<a href="${pageContext.request.contextPath}/products/delete/${product.id}.html">Delete</a> <br />
+		<a href="${pageContext.request.contextPath}/product/detail/${product.id}.html">Detail</a> - 
+		<a href="${pageContext.request.contextPath}/product/edit/${product.id}.html">Edit</a> -
+		<a href="${pageContext.request.contextPath}/product/delete/${product.id}.html">Delete</a> <br />
 	</c:forEach>
 </body>
 </html>
