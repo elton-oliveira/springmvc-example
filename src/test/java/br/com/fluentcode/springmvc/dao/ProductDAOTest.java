@@ -33,6 +33,7 @@ public class ProductDAOTest {
 	
 	@Test
 	@ExpectedDatabase(value = "classpath:/scenarios/productDAOTest/shouldInsertAProduct/expected.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@DatabaseTearDown(value = "classpath:/scenarios/productDAOTest/shouldInsertAProduct/expected.xml", type = DatabaseOperation.DELETE_ALL)
 	public void shouldInsertAProduct(){
 		Product product = new Product();
 		product.setName("T-shirt");
