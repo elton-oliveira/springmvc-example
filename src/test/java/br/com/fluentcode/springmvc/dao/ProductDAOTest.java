@@ -20,6 +20,8 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/app-config-test.xml"})
@@ -30,22 +32,17 @@ public class ProductDAOTest {
 	private ProductDAO dao;
 	
 	@Test
+	@ExpectedDatabase(value = "classpath:/scenarios/productDAOTest/shouldInsertAProduct/expected.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void shouldInsertAProduct(){
 		Product product = new Product();
 		product.setName("T-shirt");
 		product.setPrice(new BigDecimal("129.99"));
 		dao.save(product);
-		
-		List<Product> products = dao.findAll();
-		
-		assertThat(products.size(), equalTo(1));
-		assertThat(products.get(0).getName(), equalTo("T-shirt"));
-		assertThat(products.get(0).getPrice(), equalTo(new BigDecimal("129.99")));
 	}
 	
 	@Test
-	@DatabaseSetup(value = "classpath:/scenarios/productDAOTest/data.xml", type = DatabaseOperation.INSERT)
-	@DatabaseTearDown(value = "classpath:/scenarios/productDAOTest/data.xml", type = DatabaseOperation.DELETE_ALL)
+	@DatabaseSetup(value = "classpath:/scenarios/productDAOTest/shouldSelectAProduct/setup.xml", type = DatabaseOperation.INSERT)
+	@DatabaseTearDown(value = "classpath:/scenarios/productDAOTest/shouldSelectAProduct/setup.xml", type = DatabaseOperation.DELETE_ALL)
 	public void shouldSelectAProduct(){
 		List<Product> products = dao.findAll();
 		
