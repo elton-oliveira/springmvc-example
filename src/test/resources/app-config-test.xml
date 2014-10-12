@@ -10,7 +10,7 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
 	<!-- Import configuration -->
-	<import resource="file:**/app-config.xml"/>
+	<import resource="file:**/webapp/WEB-INF/spring/app-config.xml"/>
 	
 	<!-- Override the datasource configuration -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
